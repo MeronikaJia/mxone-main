@@ -140,6 +140,22 @@
               </div>
               <div class="shortcuts-mobile-overlay"></div>
             </div>
+            
+            <!-- 添加站外播放功能 -->
+            <div class="drop"><span class="btn-block-o handle-btn handle-more" title="使用站外播放器观看"><i class="icon-play"></i>
+              <em>播放</em><p class="block-name">站外播放</p>
+              </span>
+              <div class="drop-content handle-more-drop">
+                <div class="drop-content-box">
+                  <div class="drop-content-items">
+                    <a class="btn-block-o" href="javascript:void(0);" onclick="openExternalPlayer('{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['url']}')"><i class="icon-play"></i>
+                      <p class="block-name"><strong>站外播放</strong><br>使用在线播放器播放</p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="shortcuts-mobile-overlay"></div>
+            </div>
             {notempty name="obj[vod_down_from]"}
              <a href="{:mac_url_vod_down($obj)}" class="btn-block-o handle-btn handle-down" title="《{$obj.vod_name}》免费下载"><i class="icon-download-bold"></i><em>免费</em><p class="block-name">下载</p></a>
              {/notempty}
@@ -421,6 +437,22 @@ strstr($obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['url'],"wasu.
 }	    
 </script>
 {/if}
+
+<script>
+// 打开外部播放器
+function openExternalPlayer(url) {
+    // 根据视频链接判断使用http还是https通道
+    var playerUrl;
+    if(url.indexOf('https://') === 0) {
+        playerUrl = 'https://tools.liumingye.cn/m3u8/#' + url;
+    } else {
+        playerUrl = 'http://m3u8.liumingye.cn/#' + url;
+    }
+    
+    // 在新窗口打开播放器
+    window.open(playerUrl, '_blank');
+}
+</script>
 </body>
 
 </html>
